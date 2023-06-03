@@ -3,6 +3,9 @@ authors=["Ananth Raghav"]
 name = "keygen"
 version = "0.1.0"
 edition = "2021"
+license="MIT"
+repository = "https://github.com/ananth243/keygen/"
+description="A simple command line password generator"
 
 [dependencies]
 clap = { version = "4.3.1", features = ["derive"] }
