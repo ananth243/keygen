@@ -4,7 +4,7 @@ use password::generate_password;
 use copypasta::{ClipboardContext, ClipboardProvider};
 
 #[derive(Parser, Debug)]
-#[command(author="Ananth Raghav", version, about="A command line password generator", long_about = None)]
+#[command(author=env!("CARGO_PKG_AUTHORS"), version=env!("CARGO_PKG_VERSION"), about="A simple command line password generator", long_about = None)]
 
 struct Args {
     /// Include uppercase alphabets. Default false
@@ -18,14 +18,8 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    let l = match args.length{
-        None=> 8,
-        Some(t)=> t
-    };
-    let alpha = match args.alpha{
-        None=>false,
-        Some(t)=>t
-    };
+    let l = args.length.unwrap_or(8);
+    let alpha = args.alpha.unwrap_or(false);
     let password = generate_password(l,alpha);
     let mut ctx = ClipboardContext::new().unwrap();
     ctx.set_contents(password.as_str().to_owned()).unwrap();
